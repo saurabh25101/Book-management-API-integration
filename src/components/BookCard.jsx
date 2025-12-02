@@ -1,6 +1,6 @@
  import { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
 
 const BookCard = ({ book, onDelete }) => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const BookCard = ({ book, onDelete }) => {
       <div className="col-12 col-sm-6 col-md-4 mb-3">
         <div className="card h-100 shadow">
           <img
-            src={book.coverimg}
+            src={book.coverimg || "https://static.thenounproject.com/png/default-image-icon-4595376-512.png"}
             className="card-img mt-3 mx-5"
             alt={book.title}
             style={{ height: "200px", width: "200px" }}
@@ -51,7 +51,7 @@ const BookCard = ({ book, onDelete }) => {
             <div className="d-flex justify-content-between mt-2">
               <button
                 className="btn btn-primary btn-sm"
-                onClick={() => handleEdit(book.id)}
+                onClick={() => handleEdit(book._id)}
               >
                 <i className="bi bi-pencil p-2"></i>
               </button>

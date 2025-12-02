@@ -1,9 +1,7 @@
-
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
-const BookForm=()=> {
+import { useNavigate, useParams } from "react-router-dom";
+import { postBook } from "../api/bookService";
+const BookForm = () => {
   const initialValues = {
     title: "",
     author: "",
@@ -12,12 +10,12 @@ const BookForm=()=> {
     status: "",
     coverimg: null,
   };
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState(initialValues);
   const [errors, setErrors] = useState({});
 
-  const {id} = useParams();
+  const { id } = useParams();
   console.log(id, "Id");
 
   const handleChange = (e) => {
@@ -43,27 +41,30 @@ const BookForm=()=> {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if(id!=="null"){
-    //   projectUpdate()
-    // }
-    // else{
-    //   addEventListener()
-    // }
-
     if (validate()) {
-      alert("Book Added Successfully!");
+      try {
+    
+        const response = await postBook(form);
+        console.log("Book Added:", response);
+
+        alert("Book Added Successfully!");
+        navigate("/");  
+      } catch (error) {
+        console.log("Error adding book:", error);
+        alert("Failed to add book!");
+      }
     }
   };
-  
-
 
   return (
     <div className="container mt-4 d-flex justify-content-center ">
       <div className="w-50 h-25">
-        <h2 className="mb-4 text-center fw-bold ">{id=="null" ?"Add Book":"Edit Book"}</h2>
+        <h2 className="mb-4 text-center fw-bold ">
+          {id == "null" ? "Add Book" : "Edit Book"}
+        </h2>
 
         <form onSubmit={handleSubmit}>
           {/* Title */}
@@ -162,13 +163,12 @@ const BookForm=()=> {
           {/* Buttons */}
           <div className="d-flex justify-content-end gap-2 mt-4">
             <button type="submit" className="btn btn-primary btn-sm">
-              {id!=="null" ?"Update Book":"Add Book"}
+              {id !== "null" ? "Update Book" : "Add Book"}
             </button>
             <button
               type="button"
               className="btn btn-secondary btn-sm"
-          onClick={() => navigate("/")}
-
+              onClick={() => navigate("/")}
             >
               Cancel
             </button>
@@ -177,6 +177,6 @@ const BookForm=()=> {
       </div>
     </div>
   );
-}
+};
 
-export default BookForm
+export default BookForm;

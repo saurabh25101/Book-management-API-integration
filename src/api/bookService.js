@@ -5,3 +5,20 @@ export const getBooks = async () => {
   const data = await res.json();
   return data;
 };
+ 
+export const postBook = async (payload) => {
+  const res = await fetch(url,{
+    method: "POST",
+    headers:{
+      "Content-Type":"application/json",
+    },
+    body:JSON.stringify(payload),
+  });
+  const data = await res.json();
+  return data;
+};
+
+ export const getBookById = async (id) => {
+  const res = await fetch(`${url}/${id}`);
+  return res.json();
+};
