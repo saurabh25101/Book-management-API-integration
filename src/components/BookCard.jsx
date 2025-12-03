@@ -1,72 +1,67 @@
+ 
+
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+ 
 
-const BookCard = ({ book, onDelete }) => {
+const BookCard = ({ book, onDelete, isDeleting }) => {
   const navigate = useNavigate();
   const [showConfirm, setShowConfirm] = useState(false);
 
-  // Edit button
-  const handleEdit = (id) => {
-    navigate(`/bookform/${id}`);
-  };
-
-  // Delete popup handlers
+  const handleEdit = () => navigate(`/bookform/${book._id}`);
   const handleDeleteClick = () => setShowConfirm(true);
   const handleCancel = () => setShowConfirm(false);
   const handleConfirm = () => {
-   
     onDelete(book._id);
-
     setShowConfirm(false);
   };
 
   return (
     <>
-      <div className="col-12 col-sm-6 col-md-4 mb-3">
-        <div className="card h-100 shadow">
-          <img
-            src={
-              book.coverimg ||
-              "https://static.thenounproject.com/png/default-image-icon-4595376-512.png"
-            }
-            className="card-img d-flex justify-content-center text-align-center"
-            alt={book.title}
-            style={{ height: "200px", width: "200px" }}
-          />
+    <div className="col-12 col-sm-6 col-md-4 mb-4">
+  <div className="card book-card h-100 shadow-sm rounded-4 overflow-hidden bg-white">
+    
+    {/* Image */}
+    <div
+      className="book-img-wrapper bg-light d-flex justify-content-center align-items-center p-3"
+      style={{ height: "220px" }}
+    >
+      <img
+        src={
+          book.coverimg ||
+          "default.png"
+        }
+        alt={book.title}
+        className="img-fluid rounded"
+        style={{ height: "100%", objectFit: "cover" }}
+      />
+    </div>
 
-          <div className="card-body p-2 px-5 pb-4">
-            <h6 className="card-title mb-1 fw-bold text-info fs-5">
-              {book.title}
-            </h6>
-            <p className="card-text mb-1 small">
-              <strong>Author: </strong>
-              {book.author}
-            </p>
-            <p className="card-text mb-1 small">
-              <strong>Genre:</strong> {book.genre}
-            </p>
-            <p className="card-text mb-1 small">
-              <strong>Year: </strong>
-              {book.year}
-            </p>
 
-            <span>{book.status}</span>
+          {/* Card Content */}
+          <div className="card-body px-4 pb-4">
+            <h5 className="fw-bold text-primary text-truncate">{book.title}</h5>
+            <p className="text-muted small mb-1"><strong>Author:</strong> {book.author}</p>
+            <p className="text-muted small mb-1"><strong>Genre:</strong> {book.genre}</p>
+            <p className="text-muted small mb-1"><strong>Year:</strong> {book.year}</p>
+            <p className="text-muted small mb-2"><strong>Status:</strong> {book.status}</p>
 
+            {/* Buttons */}
             <div className="d-flex justify-content-between mt-2">
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={() => handleEdit(book._id)}
-              >
-                <i className="bi bi-pencil p-2"></i>
-              </button>
-              
-              <button
-                className="btn btn-danger btn-sm"
+              <Button variant="outline-primary" size="sm" onClick={handleEdit} className="rounded-pill px-3">
+                <i className="bi bi-pencil-square"></i>
+              </Button>
+
+              <Button
+                variant="outline-danger"
+                size="sm"
                 onClick={handleDeleteClick}
+                className="rounded-pill px-3"
+                disabled={isDeleting}
               >
-                <i className="bi bi-trash3-fill p-2"></i>
-              </button>
+                {isDeleting ? <span className="spinner-border spinner-border-sm"></span> : <i className="bi bi-trash-fill"></i>}
+              </Button>
             </div>
           </div>
         </div>
@@ -77,14 +72,12 @@ const BookCard = ({ book, onDelete }) => {
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete "{book.title}"?</Modal.Body>
+        <Modal.Body>
+          Are you sure you want to delete <strong>{book.title}</strong>?
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleConfirm}>
-            Yes, Delete
-          </Button>
+          <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+          <Button variant="danger" onClick={handleConfirm}>Yes, Delete</Button>
         </Modal.Footer>
       </Modal>
     </>
