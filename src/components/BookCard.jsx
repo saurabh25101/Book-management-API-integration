@@ -1,4 +1,4 @@
- import { useState } from "react";
+import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,9 @@ const BookCard = ({ book, onDelete }) => {
   const handleDeleteClick = () => setShowConfirm(true);
   const handleCancel = () => setShowConfirm(false);
   const handleConfirm = () => {
-    onDelete(book.id); // parent se delete function
+   
+    onDelete(book._id);
+
     setShowConfirm(false);
   };
 
@@ -24,8 +26,11 @@ const BookCard = ({ book, onDelete }) => {
       <div className="col-12 col-sm-6 col-md-4 mb-3">
         <div className="card h-100 shadow">
           <img
-            src={book.coverimg || "https://static.thenounproject.com/png/default-image-icon-4595376-512.png"}
-            className="card-img mt-3 mx-5"
+            src={
+              book.coverimg ||
+              "https://static.thenounproject.com/png/default-image-icon-4595376-512.png"
+            }
+            className="card-img d-flex justify-content-center text-align-center"
             alt={book.title}
             style={{ height: "200px", width: "200px" }}
           />
@@ -55,6 +60,7 @@ const BookCard = ({ book, onDelete }) => {
               >
                 <i className="bi bi-pencil p-2"></i>
               </button>
+              
               <button
                 className="btn btn-danger btn-sm"
                 onClick={handleDeleteClick}

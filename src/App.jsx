@@ -1,17 +1,23 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookForm from "./components/FormData";
-import DashBoard from "./pages/Dashboard/Dashboard";
 import Navbar from "./pages/Navbar";
+import DashBoard from "./pages/dashboard/DashBoard";
+import { Toaster } from "react-hot-toast";
+
+
+
 
 const App = () => {
   return (
     <BrowserRouter>
+    
+
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <Navbar />
+          
               <DashBoard />
             </>
           }
@@ -21,7 +27,12 @@ const App = () => {
           path="/bookform/:id"
           element={<BookForm />}
         />
+         <Route
+          path="/bookform"
+          element={<BookForm />}
+        />
       </Routes>
+       <Toaster position="top-center"/>
     </BrowserRouter>
   );
 };
