@@ -25,7 +25,7 @@ const Navbar = ({ onSearch }) => {
           <div className="col-4 col-sm-4 col-lg-4 mb-2 mb-sm-0">
             <h3 className="m-0 fw-bold">
               <img
-                src="/src/assets/stack-of-books.png"
+                src="/public/stack-of-books.png"
                 style={{ width: "30px", height: "30px", marginRight: "8px" }}
               />
              Library Admin
