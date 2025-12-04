@@ -23,14 +23,17 @@ const Navbar = ({ onSearch }) => {
           
           {/* Logo */}
           <div className="col-4 col-sm-4 col-lg-4 mb-2 mb-sm-0">
-            <h3 className="m-0 fw-bold">
-              <img
-                src="/public/stack-of-books.png"
-                style={{ width: "30px", height: "30px", marginRight: "8px" }}
-              />
-             Library Admin
-            </h3>
-          </div>
+  <h3 className="m-0 fw-bold d-flex align-items-center">
+    <img
+  src="/stack-of-books.png" // image file in public folder
+  alt="Books Icon"
+  style={{ width: "35px", height: "40px", marginRight: "8px" }}
+/>
+
+    Library Admin
+  </h3>
+</div>
+
 
           {/* search bar */}
           <div className="col-4 col-sm-4 col-lg-4 mb-2 mb-sm-0">
