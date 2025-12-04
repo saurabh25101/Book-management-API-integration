@@ -20,34 +20,40 @@ const BookCard = ({ book, onDelete, isDeleting }) => {
   return (
     <>
     <div className="col-12 col-sm-6 col-md-4 mb-4">
-  <div className="card book-card h-100 shadow-sm rounded-4 overflow-hidden bg-white">
+  <div className="card book-card h-100 shadow-sm rounded-4 overflow-hidden bg-white ">
     
     {/* Image */}
-    <div
-      className="book-img-wrapper bg-light d-flex justify-content-center align-items-center p-3"
-      style={{ height: "220px" }}
-    >
-      <img
-        src={
-          book.coverimg ||
-          "default.png"
-        }
-        alt={book.title}
-        className="img-fluid rounded"
-        style={{ height: "100%", objectFit: "cover" }}
-      />
-    </div>
+   <div
+  className="book-img-wrapper bg-light d-flex justify-content-center align-items-center p-2 mx-auto"
+  style={{ width: "180px", height: "220px", borderRadius: "10px", backgroundColor: "#f0f0f0" }}
+>
+  <img
+    src={book.coverimg || "https://cdn-icons-png.flaticon.com/512/189/189665.png"}
+    alt={book.title}
+    style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "8px" }}
+    onError={(e) => { e.target.src = "https://cdn-icons-png.flaticon.com/512/189/189665.png"; }}
+  />
+</div>
+
 
 
           {/* Card Content */}
-          <div className="card-body px-4 pb-4">
+          <div className="card-body  pb-4 px-4">
             <h5 className="fw-bold text-primary text-truncate">{book.title}</h5>
             <p className="text-muted small mb-1"><strong>Author:</strong> {book.author}</p>
             <p className="text-muted small mb-1"><strong>Genre:</strong> {book.genre}</p>
             <p className="text-muted small mb-1"><strong>Year:</strong> {book.year}</p>
-            <p className="text-muted small mb-2"><strong>Status:</strong> {book.status}</p>
+          <p className=" text-muted small mb-2 ">
+  <strong>Status:</strong>{" "}
+  <span
+    className={`badge rounded-pill px-2 
+      ${book.status === "Available" ? "bg-success" : "bg-danger"}`}
+  >
+    {book.status}
+  </span>
+</p>
 
-            {/* Buttons */}
+             {/* Buttons */}
             <div className="d-flex justify-content-between mt-2">
               <Button variant="outline-primary" size="sm" onClick={handleEdit} className="rounded-pill px-3">
                 <i className="bi bi-pencil-square"></i>

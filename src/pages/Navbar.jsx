@@ -28,7 +28,7 @@ const Navbar = ({ onSearch }) => {
                 src="/src/assets/stack-of-books.png"
                 style={{ width: "30px", height: "30px", marginRight: "8px" }}
               />
-              BOOK ADMIN
+             Library Admin
             </h3>
           </div>
 

@@ -117,7 +117,8 @@ const BookForm = () => {
   }
 
   return (
-    <div className="container mt-4 d-flex justify-content-center">
+     <div className="container mt-3 d-flex justify-content-center p-2">
+
       <div className="w-50">
         <h2 className=" text-center fw-bold">{!id ? "Add Book" : "Edit Book"}</h2>
 
@@ -174,6 +175,7 @@ const BookForm = () => {
               name="year"
               value={form.year}
               onChange={handleChange}
+              maxLength={4}
             />
             {errors.year && <div className="text-danger small">{errors.year}</div>}
           </div>
