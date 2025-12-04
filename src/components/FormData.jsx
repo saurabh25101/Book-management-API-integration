@@ -1,6 +1,3 @@
- 
-
-
 
 /* eslint-disable react-hooks/immutability */
 import { useEffect, useState } from "react";
@@ -46,9 +43,16 @@ const BookForm = () => {
   if (!author) newErrors.author = "Author is required";
   if (!genre) newErrors.genre = "Genre is required";
 
-  if (!year) newErrors.year = "Year is required";
-  else if (isNaN(year)) newErrors.year = "Year must be numeric";
-  else if (year.length > 4) newErrors.year = "Year cannot be more than 4 digits";
+    if (!year) {
+  newErrors.year = "Year is required";
+} else if (isNaN(year)) {
+  newErrors.year = "Year must be numeric";
+} else if (Number(year) <= 0) {
+  newErrors.year = "Year must be positive";
+} else if (year.length > 4) {
+  newErrors.year = "Year cannot be more than 4 digits";
+}
+
 
   if (!status) newErrors.status = "Status is required";
 
@@ -176,6 +180,7 @@ const BookForm = () => {
               value={form.year}
               onChange={handleChange}
               maxLength={4}
+           
             />
             {errors.year && <div className="text-danger small">{errors.year}</div>}
           </div>
