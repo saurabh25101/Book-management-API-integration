@@ -1,4 +1,4 @@
-const url = "https://crudcrud.com/api/a1ca7415dfdf45c881d5316e794a27df/books";
+const url = "https://crudcrud.com/api/784983ac2c694fc6ae4a1455b009b969/books";
 
 export const getBooks = async () => {
   const res = await fetch(url);
